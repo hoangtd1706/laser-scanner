@@ -4,145 +4,36 @@ import {
   SaveOutlined,
 } from "@ant-design/icons";
 import { Button } from "antd";
-import React from "react";
-import styled from "styled-components";
-
-const MenuSideWidth = 300;
-
-const Wrap = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-`;
-
-const WrapHeader = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  height: 42px;
-  width: 100%;
-  border-bottom: 1px solid #818181;
-`;
-
-const Brand = styled.div`
-  width: 100%;
-  height: 100%;
-  color: #fff;
-  line-height: 34px;
-`;
-
-const WrapContent = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  width: 100%;
-  height: calc(100% - 42px);
-  overflow: hidden;
-`;
-
-const WrapLeft = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  width: ${MenuSideWidth}px;
-  height: 100%;
-  border-right: 1px solid #818181;
-`;
-
-const WrapRight = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  width: calc(100% - ${MenuSideWidth}px);
-  height: 100%;
-`;
-
-const WrapMenu = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-`;
-
-const WrapMenuBar = styled.div`
-  position: relative;
-  width: 26px;
-  height: 100%;
-  border-right: 1px solid #818181;
-  overflow: hidden;
-`;
-
-const MenuBar = styled.div`
-  height: 100%;
-  overflow: auto;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-const MenuItem = styled.div<{ active: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 0;
-  width: auto;
-  background: ${({ active }) => (active ? "#616161" : "transparent")};
-  cursor: pointer;
-  &:hover {
-    background: #555555;
-  }
-`;
-
-const MenuText = styled.span`
-  font-size: 14px;
-  font-weight: 600;
-  color: #fff;
-  writing-mode: vertical-rl;
-  transform: rotate(-180deg);
-`;
-
-const HeaderLeft = styled.div`
-  width: ${MenuSideWidth}px;
-  height: 100%;
-  border-right: 1px solid #818181;
-`;
-
-const HeaderRight = styled.div`
-  width: calc(100% - ${MenuSideWidth}px);
-  height: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px;
-`;
-
-const HeaderContent = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  gap: 6px;
-  width: fit-content;
-  height: 100%;
-`;
-
-const HeaderContentItem = styled.div`
-  font-size: 12px;
-  color: #fff;
-`;
-
-const HeaderActionArea = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  gap: 6px;
-  align-items: center;
-  width: fit-content;
-  height: 100%;
-  padding: 0 6px;
-  border-left: 1px solid #818181;
-`;
+import {
+  Brand,
+  GraphArea,
+  HeaderActionArea,
+  HeaderContent,
+  HeaderContentItem,
+  HeaderLeft,
+  HeaderRight,
+  MainContent,
+  MenuBar,
+  MenuItem,
+  MenuText,
+  SmartBlock,
+  Wrap,
+  WrapContent,
+  WrapHeader,
+  WrapLeft,
+  WrapMenu,
+  WrapMenuBar,
+  WrapRight,
+} from "./styled";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
+import General from "./pages/general";
+import Processing from "./pages/processing";
+import Trigger from "./pages/trigger";
+import Network from "./pages/network";
+import Smart from "./pages/smart";
 
 function App() {
+  const location = useLocation();
   return (
     <Wrap>
       <WrapHeader>
@@ -188,26 +79,40 @@ function App() {
           <WrapMenu>
             <WrapMenuBar>
               <MenuBar>
-                <MenuItem active={true}>
+                <MenuItem to={"/"}>
                   <MenuText>General</MenuText>
                 </MenuItem>
-                <MenuItem active={false}>
+                <MenuItem to={"/processing"}>
                   <MenuText>Processing</MenuText>
                 </MenuItem>
-                <MenuItem active={false}>
+                <MenuItem to={"/trigger"}>
                   <MenuText>Trigger</MenuText>
                 </MenuItem>
-                <MenuItem active={false}>
+                <MenuItem to={"/smart"}>
                   <MenuText>Smart</MenuText>
                 </MenuItem>
-                <MenuItem active={false}>
+                <MenuItem to={"/network"}>
                   <MenuText>Network</MenuText>
                 </MenuItem>
               </MenuBar>
             </WrapMenuBar>
+            <Routes>
+              <Route path="/" element={<General />} />
+              <Route path="/processing" element={<Processing />} />
+              <Route path="/trigger" element={<Trigger />} />
+              <Route path="/smart" element={<Smart />} />
+              <Route path="/network" element={<Network />} />
+            </Routes>
           </WrapMenu>
         </WrapLeft>
-        <WrapRight></WrapRight>
+        <WrapRight>
+          <MainContent>
+            {location.pathname === "/smart" && (
+              <SmartBlock>Smart block</SmartBlock>
+            )}
+            <GraphArea>Graph</GraphArea>
+          </MainContent>
+        </WrapRight>
       </WrapContent>
     </Wrap>
   );
