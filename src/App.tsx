@@ -6,7 +6,6 @@ import {
 import { Button } from "antd";
 import {
   Brand,
-  GraphArea,
   HeaderActionArea,
   HeaderContent,
   HeaderContentItem,
@@ -16,7 +15,6 @@ import {
   MenuBar,
   MenuItem,
   MenuText,
-  SmartBlock,
   Wrap,
   WrapContent,
   WrapHeader,
@@ -25,15 +23,15 @@ import {
   WrapMenuBar,
   WrapRight,
 } from "./styled";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import General from "./pages/general";
 import Processing from "./pages/processing";
 import Trigger from "./pages/trigger";
 import Network from "./pages/network";
 import Smart from "./pages/smart";
+import ViewControl from "./components/ViewControl";
 
 function App() {
-  const location = useLocation();
   return (
     <Wrap>
       <WrapHeader>
@@ -107,10 +105,7 @@ function App() {
         </WrapLeft>
         <WrapRight>
           <MainContent>
-            {location.pathname === "/smart" && (
-              <SmartBlock>Smart block</SmartBlock>
-            )}
-            <GraphArea>Graph</GraphArea>
+            <ViewControl />
           </MainContent>
         </WrapRight>
       </WrapContent>

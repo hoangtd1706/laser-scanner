@@ -9,6 +9,11 @@ export const Wrap = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  .SplitterGutter {
+    padding: 0 1px;
+    flex-direction: column;
+    background: #616161;
+  }
 `;
 
 export const WrapHeader = styled.div`

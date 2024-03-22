@@ -1,8 +1,6 @@
 import { CaretRightOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import styled from "styled-components";
-import Item2 from "./Item2";
-import Item from "./item";
 
 const Wrap = styled.div`
   display: flex;
